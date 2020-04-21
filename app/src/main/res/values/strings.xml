@@ -8,4 +8,10 @@
     <string-array name="sending_countries_array">
         <item>미국(USD)</item>
     </string-array>
+    <string name="result_message_1">
+        수취금액은
+    </string>
+    <string name="result_message_2">
+         입니다.
+    </string>
 </resources>
