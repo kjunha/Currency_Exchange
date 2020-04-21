@@ -29,7 +29,7 @@
                 android:id="@+id/sender"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Hi There"
+                android:text="미국(USD)"
                 android:textSize="20dp"/>
         </TableRow>
         <TableRow
@@ -44,7 +44,7 @@
                 android:id="@+id/receiver"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Hi There"
+                android:text="Hi"
                 android:textSize="20dp"/>
             <Button
                 android:id="@+id/alt_receiver"
