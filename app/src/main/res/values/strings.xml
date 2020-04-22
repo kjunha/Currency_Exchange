@@ -1,17 +1,38 @@
 <resources>
     <string name="app_name">Currency Exchange</string>
+    <string name="sender_label">
+        Sending:
+    </string>
+    <string name="receiver_label">
+        Receiving:
+    </string>
+    <string name="exchange_rate_label">
+        Exchange Rate:
+    </string>
+    <string name="request_time_label">
+        Requested:
+    </string>
+    <string name="amount_label">
+        Amount:
+    </string>
+    <string name="exchange_rate_unit" translatable="false">
+        %1$s/%2$s
+    </string>
+    <string name="result_message">
+        The amount received will be %1$s%2$s.
+    </string>
+    <string name="error_message">
+        The amount must be greater than 0, less than 10,000.
+    </string>
     <string-array name="receiving_countries_array">
-        <item>한국(KRW)</item>
-        <item>일본(JPY)</item>
-        <item>필리핀(PHP)</item>
+        <item>Korea(KRW)</item>
+        <item>Japan(JPY)</item>
+        <item>Philippines(PHP)</item>
     </string-array>
     <string-array name="sending_countries_array">
-        <item>미국(USD)</item>
+        <item>United States(USD)</item>
     </string-array>
-    <string name="result_message_1">
-        수취금액은
-    </string>
-    <string name="result_message_2">
-         입니다.
+    <string name="url" translatable="false">
+        http://apilayer.net/api/live?access_key=9d28fa2dde263e5e0f2a3ab7419f5c6e&amp;currencies=KRW,%20JPY,%20PHP&amp;source=USD&amp;format=1
     </string>
 </resources>

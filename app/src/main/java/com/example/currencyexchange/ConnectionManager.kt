@@ -38,8 +38,10 @@ class ConnectionManager constructor(context: Context) {
     }
 
     public fun updateCurrency(time: LocalDateTime) {
-        if(lastUpdate == null || ChronoUnit.MINUTES.between(lastUpdate, time) > 1) {
+        if(lastUpdate == null || ChronoUnit.MINUTES.between(lastUpdate, time) > 15) {
             lastUpdate = time
+            //val url = context.getString(R.string.url)
+            //TODO Debugging Line
             val url = "http://www.apilayer.net/api/live?access_key=ee50cd7cc73c9b7a7bb3d9617cfb6b9c"
             val jsonObject = JsonObjectRequest(
                 Request.Method.GET,

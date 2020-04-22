@@ -8,15 +8,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="환율계산"
-        android:textSize="40dp"/>
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textSize="40sp"/>
     <TableLayout
         android:id="@+id/baseLayout"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:stretchColumns="*"
-        android:padding="15dp"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:padding="15dp">
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,14 +24,14 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="송금국가 : "
-                android:textSize="20dp"/>
+                android:text="@string/sender_label"
+                android:textSize="20sp"/>
             <Spinner
                 android:id="@+id/sender"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:entries="@array/sending_countries_array"
-                android:textSize="20dp"/>
+                android:textSize="20sp"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -40,14 +40,14 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="수취국가 : "
-                android:textSize="20dp"/>
+                android:text="@string/receiver_label"
+                android:textSize="20sp"/>
             <Spinner
                 android:id="@+id/receiver"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:entries="@array/receiving_countries_array"
-                android:textSize="20dp"/>
+                android:textSize="20sp"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -56,14 +56,13 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="환율 : "
-                android:textSize="20dp"/>
+                android:text="@string/exchange_rate_label"
+                android:textSize="20sp"/>
             <TextView
                 android:id="@+id/exchange_rate"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Hi There"
-                android:textSize="20dp"/>
+                android:textSize="20sp"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -72,14 +71,13 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="조회시간 : "
-                android:textSize="20dp"/>
+                android:text="@string/request_time_label"
+                android:textSize="20sp"/>
             <TextView
                 android:id="@+id/request_time"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Hi There"
-                android:textSize="20dp"/>
+                android:textSize="20sp"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -88,24 +86,25 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="송금액 : "
-                android:textSize="20dp"/>
+                android:text="@string/amount_label"
+                android:textSize="20sp"/>
             <EditText
                 android:id="@+id/amount"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal"
+                android:autofillHints="no" />
             <TextView
                 android:id="@+id/base_currency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="USD"
-                android:textSize="20dp"/>
+                android:textSize="20sp"/>
         </TableRow>
     </TableLayout>
     <TextView
         android:id="@+id/result_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="28dp"/>
+        android:textAlignment="center"
+        android:textSize="28sp"/>
 </LinearLayout>

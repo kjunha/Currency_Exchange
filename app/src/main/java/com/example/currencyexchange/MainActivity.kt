@@ -4,18 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.StringBuilder
+import java.text.DecimalFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
-import java.util.*
 
 class MainActivity : AppCompatActivity(), TextWatcher {
     private lateinit var senderSpinner:Spinner
@@ -24,8 +21,10 @@ class MainActivity : AppCompatActivity(), TextWatcher {
     private lateinit var requestTimeTextView:TextView
     private lateinit var amountEditText:EditText
     private lateinit var resultTextView:TextView
+    private lateinit var baseCurrencyTextView: TextView
 
-    private var dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+    private val dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+    private val df = DecimalFormat("#,##0.00")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +40,7 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         requestTimeTextView = findViewById(R.id.request_time)
         amountEditText = findViewById(R.id.amount)
         resultTextView = findViewById(R.id.result_text)
+        baseCurrencyTextView = findViewById(R.id.base_currency)
 
         //Apply Listener
         receiverSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
@@ -50,9 +50,7 @@ class MainActivity : AppCompatActivity(), TextWatcher {
                 position: Int,
                 id: Long
             ) {
-                exchangeRateTextView.setText(getCurrencyCode(receiverSpinner.selectedItem.toString())
-                        + "/"
-                        + getCurrencyCode(senderSpinner.selectedItem.toString()))
+                exchangeRateTextView.text = getString(R.string.exchange_rate_unit, getCurrencyCode(senderSpinner.selectedItem.toString()), getCurrencyCode(receiverSpinner.selectedItem.toString()))
                 update()
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -61,11 +59,12 @@ class MainActivity : AppCompatActivity(), TextWatcher {
     }
 
     private fun update() {
-        requestTimeTextView.setText(LocalDateTime.now().format(dateTimeFormat))
+        requestTimeTextView.text = LocalDateTime.now().format(dateTimeFormat)
+        baseCurrencyTextView.text = getCurrencyCode(senderSpinner.selectedItem.toString())
         ConnectionManager.getInstance(this).updateCurrency(LocalDateTime.parse(requestTimeTextView.text, dateTimeFormat))
         val rate = ConnectionManager.getInstance(this).getCurrencyValue(senderSpinner.selectedItem.toString(), receiverSpinner.selectedItem.toString())
         val amount = if(amountEditText.text.toString().equals("")) 0.0 else amountEditText.text.toString().toDouble()
-        resultTextView.setText(resources.getString(R.string.result_message_1) + (amount*rate) + resources.getString(R.string.result_message_2))
+        resultTextView.text = getString(R.string.result_message, df.format(rate * amount), getCurrencyCode(receiverSpinner.selectedItem.toString()))
     }
 
     //Utility Functions to use CurrencyLayer service
@@ -84,7 +83,13 @@ class MainActivity : AppCompatActivity(), TextWatcher {
 
     //TextWatcher Interface
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        update()
+        val content = if(amountEditText.text.toString().equals("")) 0.0 else amountEditText.text.toString().toDouble()
+        if(content in 0.0..10000.0) {
+            amountEditText.error = null
+            update()
+        } else {
+            amountEditText.error = getString(R.string.error_message)
+        }
     }
 
     override fun afterTextChanged(s: Editable?) {}

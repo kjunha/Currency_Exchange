@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">환율계산</string>
+    <string name="sender_label">
+        송금국가:
+    </string>
+    <string name="receiver_label">
+        수취국가:
+    </string>
+    <string name="exchange_rate_label">
+        환율:
+    </string>
+    <string name="request_time_label">
+        조회시간:
+    </string>
+    <string name="amount_label">
+        송금액:
+    </string>
+    <string name="result_message">
+        수취금액은 %1$s%2$s 입니다.
+    </string>
+    <string name="error_message">
+        송금액은 0보다 커야하며 10,000보다 작아야 합니다.
+    </string>
+    <string-array name="receiving_countries_array">
+        <item>한국(KRW)</item>
+        <item>일본(JPY)</item>
+        <item>필리핀(PHP)</item>
+    </string-array>
+    <string-array name="sending_countries_array">
+        <item>미국(USD)</item>
+    </string-array>
+</resources>
