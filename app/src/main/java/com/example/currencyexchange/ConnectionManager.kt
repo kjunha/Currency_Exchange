@@ -1,7 +1,6 @@
 package com.example.currencyexchange
 
 import android.content.Context
-import android.content.res.Resources
 import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -14,7 +13,7 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 
-class ConnectionManager constructor(context: Context) {
+class ConnectionManager constructor(private val context: Context) {
     //Singleton Object (Composition Model)
     companion object {
         @Volatile
@@ -29,7 +28,6 @@ class ConnectionManager constructor(context: Context) {
 
     //Fields
     private var lastUpdate:LocalDateTime? = null
-    private val context:Context = context
     private val allSenders:Array<String> = context.resources.getStringArray(R.array.sending_countries_array)
     private val allReceivers:Array<String> = context.resources.getStringArray(R.array.receiving_countries_array)
     private val currencyMap:HashMap<String,Double> = HashMap<String, Double>()
@@ -37,7 +35,7 @@ class ConnectionManager constructor(context: Context) {
         Volley.newRequestQueue(context.applicationContext)
     }
 
-    public fun updateCurrency(time: LocalDateTime) {
+    fun updateCurrency(time: LocalDateTime) {
         if(lastUpdate == null || ChronoUnit.MINUTES.between(lastUpdate, time) > 15) {
             lastUpdate = time
             //val url = context.getString(R.string.url)
@@ -65,7 +63,7 @@ class ConnectionManager constructor(context: Context) {
         }
     }
 
-    public fun getCurrencyValue(sender:String, receiver:String):Double {
+    fun getCurrencyValue(sender:String, receiver:String):Double {
         val hashKey:String = getCurrencyCode(sender) + getCurrencyCode(receiver)
         return currencyMap.get(hashKey) ?: 0.0
     }
