@@ -10,9 +10,11 @@ import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.StringBuilder
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 class MainActivity : AppCompatActivity(), TextWatcher {
@@ -58,7 +60,15 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         amountEditText.addTextChangedListener(this)
     }
 
-    //Utility Functions
+    private fun update() {
+        requestTimeTextView.setText(LocalDateTime.now().format(dateTimeFormat))
+        ConnectionManager.getInstance(this).updateCurrency(LocalDateTime.parse(requestTimeTextView.text, dateTimeFormat))
+        val rate = ConnectionManager.getInstance(this).getCurrencyValue(senderSpinner.selectedItem.toString(), receiverSpinner.selectedItem.toString())
+        val amount = if(amountEditText.text.toString().equals("")) 0.0 else amountEditText.text.toString().toDouble()
+        resultTextView.setText(resources.getString(R.string.result_message_1) + (amount*rate) + resources.getString(R.string.result_message_2))
+    }
+
+    //Utility Functions to use CurrencyLayer service
     private fun getCurrencyCode(country: String):String {
         val builder = StringBuilder()
         for((index, char) in country.withIndex()) {
@@ -72,11 +82,7 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         return builder.toString()
     }
 
-    private fun update() {
-        requestTimeTextView.setText(LocalDateTime.now().format(dateTimeFormat))
-        resultTextView.setText(resources.getString(R.string.result_message_1) + " 10000 " + resources.getString(R.string.result_message_2))
-    }
-
+    //TextWatcher Interface
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         update()
     }

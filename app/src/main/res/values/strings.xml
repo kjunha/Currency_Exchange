@@ -2,7 +2,7 @@
     <string name="app_name">Currency Exchange</string>
     <string-array name="receiving_countries_array">
         <item>한국(KRW)</item>
-        <item>일본(JPN)</item>
+        <item>일본(JPY)</item>
         <item>필리핀(PHP)</item>
     </string-array>
     <string-array name="sending_countries_array">
